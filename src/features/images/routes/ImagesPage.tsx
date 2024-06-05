@@ -1,7 +1,7 @@
 export const ImagesPage = () => {
   return (
-    <div>
+    <section>
       <h1>ImagesPage</h1>
-    </div>
+    </section>
   );
 };

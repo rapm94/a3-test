@@ -1,7 +1,11 @@
+import { Outlet } from "react-router-dom";
+import { TopActionBar } from "../common/TopActionBar";
+
 export const RootLayout = () => {
   return (
-    <div>
-      <h1>Root Layout</h1>
-    </div>
+    <main>
+      <TopActionBar />
+      <Outlet />
+    </main>
   );
 };

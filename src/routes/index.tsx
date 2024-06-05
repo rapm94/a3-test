@@ -1,14 +1,8 @@
-import { Navigate, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import { publicRoutes } from "./public";
 
 export const AppRoutes = () => {
-  const routes = [
-    ...publicRoutes,
-    {
-      path: "*",
-      element: <Navigate to="/auth/email" replace />,
-    },
-  ];
+  const routes = [...publicRoutes];
 
   const element = useRoutes(routes);
 

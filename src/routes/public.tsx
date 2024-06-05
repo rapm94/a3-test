@@ -1,13 +1,13 @@
 import { lazyImport } from "@/utils";
 
-const { AuthenticationRoutes } = lazyImport(
-  () => import("@/features/auth/routes"),
-  "AuthenticationRoutes"
+const { ImagesRoutes } = lazyImport(
+  () => import("@/features/images/routes"),
+  "ImagesRoutes"
 );
 
 export const publicRoutes = [
   {
-    path: "/auth/*",
+    path: "/",
     element: <ImagesRoutes />,
   },
 ];
