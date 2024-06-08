@@ -1,7 +1,7 @@
 import { lazyImport } from "@/utils";
 
 const { ImagesRoutes } = lazyImport(
-  () => import("@/features/images/routes"),
+  () => import("@/features/images"),
   "ImagesRoutes"
 );
 

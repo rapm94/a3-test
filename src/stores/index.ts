@@ -5,7 +5,7 @@ import {
   useSelector as useBaseSelector,
 } from "react-redux";
 import { imageSlice } from "../features/images/imagesSlice";
-import { imageApi } from "../services/imageApi";
+import { imageApi } from "../services/imagesApi";
 
 const makeStore = () => {
   return configureStore({

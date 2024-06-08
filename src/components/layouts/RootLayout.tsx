@@ -3,7 +3,7 @@ import { TopActionBar } from "../common/TopActionBar";
 
 export const RootLayout = () => {
   return (
-    <main>
+    <main className="h-screen flex flex-col w-screen items-center">
       <TopActionBar />
       <Outlet />
     </main>
