@@ -1,10 +1,16 @@
 import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 interface ImagesState {
-  [breed: string]: string[];
+  selectedBreed: string | null;
+  selectedSubBreed: string | null;
+  images: string[];
 }
 
-const initialState: ImagesState = {};
+const initialState: ImagesState = {
+  selectedBreed: null,
+  selectedSubBreed: null,
+  images: [],
+};
 
 export const imageSlice = createSlice({
   name: "images",
@@ -14,9 +20,13 @@ export const imageSlice = createSlice({
       state,
       action: PayloadAction<{ breed: string; images: string[] }>
     ) => {
-      state[action.payload.breed] = action.payload.images;
+      state.selectedBreed = action.payload.breed;
+      state.images = action.payload.images;
+    },
+    setSelectedSubBreed: (state, action: PayloadAction<string | null>) => {
+      state.selectedSubBreed = action.payload;
     },
   },
 });
 
-export const { setImages } = imageSlice.actions;
+export const { setImages, setSelectedSubBreed } = imageSlice.actions;

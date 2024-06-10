@@ -17,11 +17,17 @@ import {
 export const TopActionBar = () => {
   const dispatch = useDispatch();
   const [selectedBreed, setSelectedBreed] = useState<string | null>(null);
+  const [selectedSubBreed, setSelectedSubBreed] = useState<string | null>(null);
 
   const { data: breedsData } = useGetBreedsQuery();
-  const { data: imagesData } = useGetImagesByBreedQuery(selectedBreed || "", {
-    skip: !selectedBreed,
-  });
+  const { data: imagesData } = useGetImagesByBreedQuery(
+    selectedBreed && selectedSubBreed
+      ? `${selectedBreed}/${selectedSubBreed}`
+      : selectedBreed || "",
+    {
+      skip: !selectedBreed,
+    }
+  );
 
   useEffect(() => {
     if (imagesData && selectedBreed) {
@@ -31,13 +37,18 @@ export const TopActionBar = () => {
 
   const handleBreedChange = (breed: string) => {
     setSelectedBreed(breed);
+    setSelectedSubBreed(null);
+  };
+
+  const handleSubBreedChange = (subBreed: string) => {
+    setSelectedSubBreed(subBreed);
   };
 
   return (
-    <nav className="flex justify-between items-center w-full h-16 bg-blue-500">
+    <nav className="flex justify-between items-center w-1/2 h-16 py-4 gap-4 max-w-80">
       <Select onValueChange={handleBreedChange}>
         <SelectTrigger>
-          <SelectValue />
+          <SelectValue placeholder="Select a breed" />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
@@ -50,16 +61,24 @@ export const TopActionBar = () => {
           </SelectGroup>
         </SelectContent>
       </Select>
-      <Select>
-        <SelectTrigger>
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
-            <SelectItem value="1">Option 1</SelectItem>
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+      {selectedBreed &&
+        breedsData?.message &&
+        breedsData.message[selectedBreed].length > 0 && (
+          <Select onValueChange={handleSubBreedChange}>
+            <SelectTrigger>
+              <SelectValue placeholder="Select a sub-breed" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {breedsData.message[selectedBreed].map((subBreed) => (
+                  <SelectItem key={subBreed} value={subBreed}>
+                    {subBreed}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        )}
     </nav>
   );
 };
