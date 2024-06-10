@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const imageApi = createApi({
-  reducerPath: "imageApi",
+export const imagesApi = createApi({
+  reducerPath: "imagesApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://dog.ceo/api" }),
   endpoints: (builder) => ({
     getBreeds: builder.query<{ message: Record<string, string[]> }, void>({
@@ -13,4 +13,4 @@ export const imageApi = createApi({
   }),
 });
 
-export const { useGetBreedsQuery, useGetImagesByBreedQuery } = imageApi;
+export const { useGetBreedsQuery, useGetImagesByBreedQuery } = imagesApi;

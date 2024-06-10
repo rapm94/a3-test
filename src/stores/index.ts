@@ -5,16 +5,16 @@ import {
   useSelector as useBaseSelector,
 } from "react-redux";
 import { imageSlice } from "../features/images/imagesSlice";
-import { imageApi } from "../services/imagesApi";
+import { imagesApi } from "../services/imagesApi";
 
 const makeStore = () => {
   return configureStore({
     reducer: {
       images: imageSlice.reducer,
-      [imageApi.reducerPath]: imageApi.reducer,
+      [imagesApi.reducerPath]: imagesApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(imageApi.middleware),
+      getDefaultMiddleware().concat(imagesApi.middleware),
   });
 };
 
